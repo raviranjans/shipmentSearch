@@ -1,0 +1,108 @@
+<div class="heading bg-light">  
+    <div class="card bg-white" style="width: 55rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="row align-items-start">
+                    <div class="col-10">
+                        
+                        <div>
+                            <button class="btn btn-outline-grey" style="display: inline-block; vertical-align: middle; margin: 0rem -0.8rem;" (click)="goBack()"><img height="35" width="35" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA5ElEQVR4nO2ZOQ4CMQxFDSeJT4cEh2BfWhabAk4Z94SORTCDqJIv/Self9+xMhlHhBBC/qaUQbJ8VI+JgMqf1KOo5RtWiGfly2MZSojXyn+uszRNKQP1fPgmnywuMi1DaVre8h5TXkTUY0f5GiSLLWzlk8eG8jVIFmvkyq8oXwO1WMJWXi0WlK+BesyRKz+Dle8N4HGFCNDbQlAhrOMEYohWPmRIO5G67kEM0cp1GmwnNgzR9E89Ujtp10yIIVoZLTpKO/UNdx0oBO54/dcDh+WxwD4xGZL8W4jwdM6j2iqEEKnLHWe6ttx4GUK0AAAAAElFTkSuQmCC"></button>
+                            <span style="display: inline-block; vertical-align: middle;">Shipment Summary<br><span style="font-size: x-small;">{{shipmentDetails.ShipmentNo}}</span></span>
+
+                          </div>
+                          
+                    </div>
+                    <div class="col-2">
+                        <button type="reset" class="btn btn-outline-primary reset" (click)="goBack()">Close</button>
+                    </div>
+                  </div>
+
+            </li>
+        </ul>
+        <div *ngIf="data" class="bg-light" style="padding: 2%">
+            <p><span style="color:purple">Packing in progress</span></p>
+            <div class="row">
+                <div class="col-md">
+                    <p><span>Shipment number</span><br>{{shipmentDetails.ShipmentNo}} </p>
+                </div>
+                <div class="col-md">
+                    <p><span>Expected ship date</span><br>{{shipmentDetails.ExpectedShipmentDate}} </p>
+                </div>
+                <div class="col-md">
+                    <p><span>Ship to</span><br>{{shipmentDetails.ToAddress.City}}, {{shipmentDetails.ToAddress.State}}, {{shipmentDetails.ToAddress.ZipCode}}  </p>
+                </div>
+                </div>
+        <button class="show-info bg-light" (click)="expand()">Show info</button>
+        </div>
+        <div *ngIf="!data" class="bg-light" style="padding: 2%">
+            <p><span style="color:purple">Packing in progress</span></p>
+            <div class="row">
+                <div class="col-md">
+                    <p><span>Shipment number</span><br>{{shipmentDetails.ShipmentNo}} </p>
+                    <p><span>Carrier</span><br>{{shipmentDetails.ScacAndService}} </p>
+                    <p><span>Assigned To</span><br>{{shipmentDetails.AssignedToUserId}}  </p>
+                    <p><span>Ship To</span><br> {{shipmentDetails.ToAddress.FirstName}} {{shipmentDetails.ToAddress.FirstName}}<br>
+                        {{shipmentDetails.ToAddress.AddressLine1}} <br>
+                        {{shipmentDetails.ToAddress.City}}, {{shipmentDetails.ToAddress.State}}, {{shipmentDetails.ToAddress.ZipCode}}<br>
+                        {{shipmentDetails.ToAddress.Country}}
+                    </p>
+                </div>
+                <div class="col-md">
+                    <p><span>Expected ship date</span><br>{{shipmentDetails.ExpectedShipmentDate}} </p>
+                    <p><span>Customer Info</span><br>{{shipmentDetails.ToAddress.FirstName}} {{shipmentDetails.ToAddress.FirstName}}<br>
+                        {{shipmentDetails.ToAddress.DayPhone}} <br>
+                        {{shipmentDetails.ToAddress.EmailID}}
+                    </p>
+                    <p><span>Bill To</span><br> {{shipmentDetails.ToAddress.FirstName}} {{shipmentDetails.ToAddress.FirstName}}<br>
+                        {{shipmentDetails.ToAddress.AddressLine1}} <br>
+                        {{shipmentDetails.ToAddress.City}}, {{shipmentDetails.ToAddress.State}}, {{shipmentDetails.ToAddress.ZipCode}}<br>
+                        {{shipmentDetails.ToAddress.Country}}
+                    </p>
+                </div>
+                </div>
+        <button class="show-info bg-light" (click)="expand()">Hide info</button>
+        </div>
+       <!-- Tabs navs -->
+<ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a
+        data-mdb-tab-init
+        class="nav-link active"
+        id="ex1-tab-1"
+        href="#ex1-tabs-1"
+        role="tab"
+        aria-controls="ex1-tabs-1"
+        aria-selected="true"
+        >Products ({{shipmentDetails.ShipmentLines.TotalNumberOfRecords}})</a
+      >
+    </li>
+  </ul>
+  <!-- Tabs navs -->
+  
+  <!-- Tabs content -->
+  <div class="tab-content" id="ex1-content">
+    <div
+      class="tab-pane fade show active"
+      id="ex1-tabs-1"
+      role="tabpanel"
+      aria-labelledby="ex1-tab-1"
+    >
+    <div class="row align-items-start" >
+        <div class="col" *ngFor="let item of shipmentLine">
+            <div class="shipmentImage">
+            <img width="100" height="100" [src]="item.OrderLine.ItemDetails.ImageUrl">
+            </div>
+            <div class="shipmentDetails">
+            {{item.OrderLine.ItemDetails.Description}}<br>
+            Product Id: {{item.OrderLine.ItemDetails.ItemID}}<br>
+            Quantity: {{item.Quantity}} Each
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Tabs content -->
+        </div>
+        </div>
+
+        
