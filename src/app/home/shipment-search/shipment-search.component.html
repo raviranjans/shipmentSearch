@@ -1,0 +1,28 @@
+<div class="heading">
+    <h2 class="text-secondary text-center">{{ 'home.LABEL_WhatDoYouWantToDO' | translate }}</h2>
+  
+    <div class="card bg-white">
+      <div class="card-body">
+        <h3 class="text-center text-secondary">{{ 'home.LABEL_ShipmentSearch' | translate }}</h3>
+        <br>
+        <form [formGroup]="searchForm" (ngSubmit)="search()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Order #" formControlName="orderNumber"><br>
+            <input type="text" class="form-control" placeholder="Shipment #" formControlName="shipmentNumber"><br>
+            <input type="text" class="form-control" placeholder="First Name" formControlName="firstName"><br>
+            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName"><br>
+            <input type="text" class="form-control" placeholder="Email ID" formControlName="email"><br>
+            <input type="text" class="form-control" placeholder="Phone number" formControlName="phoneNumber"><br>
+          </div>
+        
+          <div class="buttons">
+            <button type="reset" class="btn btn-outline-primary">Reset</button> &nbsp;
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </form>
+        
+
+      </div>
+    </div>
+  </div>
+  

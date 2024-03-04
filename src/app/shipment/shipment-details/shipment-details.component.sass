@@ -1,0 +1,52 @@
+// Define breakpoints
+$breakpoint-mobile: 480px
+$breakpoint-tablet: 767px
+$breakpoint-desktop: 1023px
+
+.card
+  margin: 0 auto
+  float: none
+  margin-bottom: 10px
+
+.show-info
+  color: turquoise
+  border: none
+  outline: none
+  float: right
+
+.shipmentImage
+  float: left
+
+.shipmentDetails
+  float: right
+
+.reset
+  float: right
+
+@media (max-width: $breakpoint-mobile)
+  .show-info
+    float: none
+
+  .shipmentImage,
+  .shipmentDetails,
+  .reset
+    float: none
+    margin-bottom: 10px
+
+@media (min-width: $breakpoint-mobile)
+  .shipmentImage,
+  .shipmentDetails
+    float: none
+    margin-bottom: 10px
+
+  .reset
+    float: right
+
+@media (min-width: $breakpoint-tablet) 
+  .shipmentImage,
+  .shipmentDetails
+    float: none
+    margin-bottom: 10px
+
+  .reset
+    float: right

@@ -1,0 +1,98 @@
+// Define breakpoints
+$breakpoint-mobile: 480px
+$breakpoint-tablet: 767px
+$breakpoint-desktop: 1023px
+
+// Default styles
+.card
+  margin: 0 auto
+  float: none
+  margin-bottom: 10px
+
+.totalShipment
+  float: left
+  color: grey
+
+li
+  border: 1px solid black
+
+.reset
+  float: right
+  height: 35px
+  width: 80px
+
+
+.card-body
+  width: 98%
+
+.filterIcon
+  position: relative
+  float: right
+
+.filter-popover
+  position: absolute
+  top: 30px
+  right: 30px
+  width: 300px
+  background-color: white
+  border: 1px solid #ccc
+  z-index: 1000
+  padding: 10px
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+
+
+ul
+  list-style-type: none
+  padding: 0
+
+li
+  cursor: pointer
+  padding: 5px 10px
+
+li:hover
+  background-color: #f9f9f9
+
+.filter-tick
+  margin-left: 5px
+
+.item
+  cursor: pointer
+
+.item:hover
+  background-color: #f9f9f9
+  border: 1px solid black
+
+.filterbody
+  background-color: #f9f9f9
+
+@media (max-width: #{$breakpoint-tablet})
+  .card-body
+    width: 100%
+
+  .reset
+    float: none
+    margin: 0 auto
+    display: block
+    margin-top: 10px
+
+@media (max-width: #{$breakpoint-mobile})
+  .filter-popover
+    width: 100%
+    right: 0
+    left: 0
+    margin: 0 auto
+    max-width: 300px
+  .reset
+    display: none
+
+  .col-2
+    display: block
+
+  .col-2 button
+    display: none
+
+  .col-2::before
+    content: "✖"
+    display: inline-block
+    font-size: 20px
+    margin-right: 5px

@@ -1,0 +1,35 @@
+// Define breakpoints
+$breakpoint-mobile: 480px
+$breakpoint-tablet: 767px
+$breakpoint-desktop: 1023px
+
+// Styles for desktop
+.card
+  width: 54rem
+  margin: 0 auto // Center the card
+
+
+// Styles for tablet
+@media (max-width: #{$breakpoint-tablet})
+  .card
+    width: 80%
+
+// Styles for mobile
+@media (max-width: #{$breakpoint-mobile})
+  .card
+    width: 100%
+// Other styles (e.g., form inputs)
+form
+  .form-group
+    input[type="text"]
+      width: 100%
+      padding: 0.5rem
+      margin-bottom: 0.5rem
+      box-sizing: border-box // Include padding in width calculation
+
+    // Adjust any other styles as needed
+
+  .buttons
+    button
+      margin-right: 0.5rem
+      float: right

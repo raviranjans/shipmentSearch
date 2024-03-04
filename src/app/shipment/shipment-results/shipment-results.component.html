@@ -1,0 +1,92 @@
+<div class="heading bg-light">
+  <div class="card bg-white" style="width: 95%;margin-top:10px;">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row align-items-start">
+          <div class="col-10">
+            <div>
+              <button class="btn btn-outline-grey" style="display: inline-block; vertical-align: middle; margin: 0rem -0.8rem;" (click)="goBack()">
+                <img height="35" width="35" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA5ElEQVR4nO2ZOQ4CMQxFDSeJT4cEh2BfWhabAk4Z94SORTCDqJIv/Self9+xMhlHhBBC/qaUQbJ8VI+JgMqf1KOo5RtWiGfly2MZSojXyn+uszRNKQP1fPgmnywuMi1DaVre8h5TXkTUY0f5GiSLLWzlk8eG8jVIFmvkyq8oXwO1WMJWXi0WlK+BesyRKz+Dle8N4HGFCNDbQlAhrOMEYohWPmRIO5G67kEM0cp1GmwnNgzR9E89Ujtp10yIIVoZLTpKO/UNdx0oBO54/dcDh+WxwD4xGZL8W4jwdM6j2iqEEKnLHWe6ttx4GUK0AAAAAElFTkSuQmCC">
+              </button>
+              <span style="display: inline-block; vertical-align: middle; font-size: large;"><b>Shipment search results</b></span>
+            </div>
+          </div>
+          <div class="col-2">
+            <button type="reset" class="btn btn-outline-info reset" (click)="goBack()">Close</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div *ngIf="shipmentService.searchResults$ | async as results">
+      <div style="padding-left: 1%; padding-top: 2%;">
+        <div class="filter-container">
+          <div class="totalShipment">
+            <span style="font-size:30px">{{ (filteredResults | async)?.length }}</span> results
+          </div>
+          <div class="filterIcon">
+            <div class="filter-icon" (click)="toggleFilterPopover()">
+              <img height="35" width="35" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAACa0lEQVR4nO2YT2gTQRSHR8GDevDm0atexave2u42u4uKChYPRUGwKAgeBFGIINZNdmKKIqWitjWlSAVrSQ1KwYqabF7+1FZK2phYwSraikTtbFrTbEZGWjVg29TsJivsB3ObefPxG3b27SL0P8DJKrXiQH8KBtIFSw3OFkwbnGDP6FzVjzWwMJhLkaBDhrN7vVHSPZytutydkVm6ryVGHC44V/Qk8261abcnot2Ok6rJdb3Q6B5vlPAyNP39unGFGyQM2k34WnG59ugMlTyg8bJ6cNk7kW9WHYIbSGswUzG56+oXJkdqZbW+tIvbFd7lUGCmZfBTwWy5q08/FwQM33hZ3VmS3K8kLwW3O5Rwxj3wQTdL7vLjKV1QIMP2WpXc7ySfbxXcMH2h/9280XLND9/nRQWm2R6oHGrkZ1sEBd6e6X3z3Si58/7JnKhEJlltZAS1SnCzgGH8VE96NpD6d7EH6QI9fXdiTvREkqwmMpIaObZJwBA/7hvP+lP66uVSOj3ZncpKGOKsFjID0RnbIGEYPHorQfzJfMly/a90eqxzTJMwPGE1kJnsaIutEz3Q19j2ktwfm19Rri+Zp0dujBK2hq1FlcDppGtFHO5ouDZE7iVyS8r1JnL0UOsIEXGkg61BFYXSNSIG70pdMZvD5qJqwS3TjRe1TLbgEnB2gmXC2QmWCWcnWCacnWCZcHaCBiTYNaRZ913My6FGwR0mrkcfdUsKMuouBreJGF6f8CWzrEG1nCDjgCe0XsLQuf9KnPgW/u9YSnCRelk9zH6d4IEp3ZKCi0cu4MiEZQXRz2/p4Y11cqi92h6m8wNF/pvl34UGiwAAAABJRU5ErkJggg==">
+              <span *ngIf="isFilterApplied()" class="filter-tick">&#10003;</span>
+            </div>
+            <div class="filter-popover" *ngIf="showFilter">
+              <div class="filterheader">
+                Refine
+                <hr>
+              </div>
+              <div class="filterbody">
+                <div>Status</div>
+                <div *ngFor="let status of statusOptions">
+                  <label>
+                    <input type="checkbox" [checked]="isFilterSelected(status)" (change)="toggleFilter(status)">
+                    {{ status }}
+                    
+                  </label>
+                </div>
+              </div>
+              <div class="filterbuttons">
+                <hr>
+                &nbsp;<button type="reset" class="btn btn-outline-info reset" (click)="resetFilters()">Reset</button>
+                <button type="reset" class="btn btn-info reset" (click)="applyFilters()">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <ul class="list-group list-group-flush">
+        <ng-container *ngFor="let item of (filteredResults | async)">
+          <li class="list-group-item item">
+            <div class="row">
+              <div class="col-md">
+                {{ item?.OrderNo }}<br>
+                {{ item?.ShipmentLines?.TotalNumberOfRecords }} products<br>
+                {{ item?.ScacAndService }}<br>
+                <p>Shipment # <a (click)="shipmentDetails($event)" class="text-info">{{ item?.ShipmentNo }}</a></p>
+              </div>
+              <div class="col-md">
+                <span style="color: purple">{{ item?.Status }}</span><br>
+                Assigned To: {{ item?.AssignedToUserId }}<br>
+                Expected pickup date: {{ item?.ExpectedShipmentDate }}
+              </div>
+              <div class="col-md">
+                <p>Customer Info<br>
+                  {{ item?.BillToAddress?.FirstName }} {{ item?.BillToAddress?.LastName }}<br>
+                  {{ item?.BillToAddress?.DayPhone }}<br>
+                  {{ item?.BillToAddress?.EMailID }}
+                </p>
+              </div>
+            </div>
+          </li>
+
+        </ng-container>
+        <div infinite-scroll
+        [infiniteScrollDistance]="2"
+        (scrolled)="loadMoreShipments()">
+      
+      </div>
+      </ul>
+    </div>
+  </div>
+</div>
